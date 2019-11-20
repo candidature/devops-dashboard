@@ -38,7 +38,7 @@ public class ToolInstance {
 	
 	private String status = "UNKNOWN"; // DISABLED // GREEN // RED 
 	
-	private String announcement;
+	private String announcement = "NONE";
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 										CascadeType.REFRESH, CascadeType.MERGE})
@@ -53,6 +53,14 @@ public class ToolInstance {
 		this.tool = tool;
 	}
 
+	public ToolInstance(String url, String team, String owner) {
+		super();
+		this.url = url;
+		this.team = team;
+		this.owner = owner;
+	}
+	
+	
 	public ToolInstance(String url, String team, String owner, Date startDate, boolean active, String status) {
 		super();
 		this.url = url;

@@ -1,6 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,54 +20,19 @@
 </head>
 
 <body>
-<div class="container">
-
-	
-	<c:choose>
-	    <c:when test="${kind == 'EDIT'}">
-	        <div id="wrapper" align="center">
-				<%@include file="header.jsp" %>
-				<div class="mt-5" id="header">
-				<h2>EDIT Devops Application Form</h2>
-			</div>
+	<div id="wrapper" align="center">
+		<div id="header">
+			<h2>Add new Devops Application Form</h2>
+		</div>
 	</div>
-	    </c:when>    
-	    <c:otherwise>
-	        <div id="wrapper" align="center">
-				<%@include file="header.jsp" %>
-				<div class="mt-5" id="header">
-					<h2>Add new Devops Application Form</h2>
-				</div>
-			</div>	
-	    </c:otherwise>
-	</c:choose>
-
+	
 
 	<div id="devops-form">
 	
 		<form:form action="saveNewApplication" modelAttribute="tool" method="POST" autocomplete="off">
-		
-			<!-- Need to associate this data with existing tool  -->
-			
-			<form:hidden path="id" />
-	
 			<div class="form-group">
 				<label for="name">Name</label> 
-				
-				
-				<c:choose>
-				    <c:when test="${kind == 'EDIT'}">
-				        <form:input type="text" class="form-control" placeholder="<Name of Application(Tool)>" 
-							readOnly="true"
-							id="name" path="name" />
-				    </c:when>    
-				    <c:otherwise>
-				        <form:input type="text" class="form-control" placeholder="<Name of Application(Tool)>" 
-							id="name" path="name" />
-				    </c:otherwise>
-				</c:choose>
-
-				
+				<form:input type="text" class="form-control" placeholder="<Name of Application(Tool)>" id="name" path="name" />
 			</div>
 			
 			<div class="form-group">
@@ -93,12 +56,7 @@
 			
 			
 				<label for="tier">Tier</label> 
-			
-				
-				<form:select class="form-control" id="tier" path="tier">
-				    <form:options items="${tiers}" />
-				</form:select>
-
+				<form:input type="text" class="form-control" placeholder="<tier>" id="tier" path="tier" />
 			</div>
 
 			
@@ -112,6 +70,6 @@
 		
 	</div>
 	
-	</div>
+	
 </body>
 </html>

@@ -52,4 +52,54 @@ public class DevopsServiceImpl implements DevopsService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	@Transactional
+	public List<ToolInstance> getInstances(int toolId) {
+		// TODO Auto-generated method stub
+		return toolInstanceDao.getToolInstances(toolId);
+		
+	}
+
+	@Override
+	@Transactional
+	public List<ToolInstance> getInstances() {
+		// TODO Auto-generated method stub
+		return toolInstanceDao.getToolInstances();
+	}
+
+	@Override
+	@Transactional
+	public List<Tool> getToolsByTier(String tier) {
+		// TODO Auto-generated method stub
+		return toolDao.getTools(tier);
+	}
+
+	@Override
+	@Transactional
+	public void deleteTool(int toolId) {
+		// TODO Auto-generated method stub
+		toolDao.deleteTool(toolId);
+	}
+
+	@Override
+	@Transactional
+	public ToolInstance getInstance(int instanceId) {
+		// TODO Auto-generated method stub
+		return toolInstanceDao.getToolInstance(instanceId);
+	}
+
+	@Override
+	@Transactional
+	public void saveToolInstance(ToolInstance toolInstance) {
+		// TODO Auto-generated method stub
+		toolInstanceDao.saveToolInstance(toolInstance);
+	}
+
+	@Override
+	@Transactional
+	public void deleteToolInstance(int instanceId) {
+		// TODO Auto-generated method stub
+		toolInstanceDao.deleteToolInstance(instanceId);
+	}
 }

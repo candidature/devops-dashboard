@@ -6,35 +6,40 @@
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
-<!-- Refernce file from our directory -->
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
+<%@include file="head.jsp" %>
 
-</head>
 <body>
+<div class="container">
 
-	<div id = "wrapper">
-		<div id="header">
-			<h2>Welcome to DevOps Dashboard</h2>
-		</div>
-	</div>
-	<div id="container">
+	<%@include file="header.jsp" %>
+<div class="row">
+<div class="col">
+	<div class="p-1">
 	
-	
-		<!-- New Button -->
-		<input type="button" value="Add Application" onclick="window.location.href='showFormForAddNewApplication'; return false;"
-		class="add-button"
-		/>
+		<c:if test="${globalAnnouncement != null }">
+			<script>
+				to_left();
+				to_right();
+			</script>
+			
+			
+			<div class="main slide-right">
+				<p>Global Announcement: ${globalAnnouncement} </p>
+			</div>
+		</c:if>
 		
-		<div id="content">
-		<table>
-		<tr>
-			<th>Tool Name</th> <th>Purpose</th> <th>Supporting Team Email(s)</th><th>Team</th><th>Action</th><th>Add Instance</th>
 		
-		</tr>
+		<c:if test="${tier != null}">
+			<div class="mt-3">
+			<h4>TIER - ${tier}</h4>
+			</div>
+				<c:if test="${tier =='TIER_1' }">
+				<div><h5><i>Below Applications are having 24*7 Support</i></h5></div>
+			</c:if>
+		</c:if>
+		
+        <div class="row mt-2 justify-content-left">
 		
 		<c:forEach var="tool" items="${tools}">
 			<!-- Construct url for update -->
@@ -42,32 +47,48 @@
 				<c:param name="toolId" value="${tool.id}"/>
 			</c:url>
 			
+			<c:url var="instancesLink" value="/devops/tool/${tool.id }/instances">
+			</c:url>
+			
 			<c:url var="addInstanceLink" value="/devops/tool/${tool.id}/instance">
 			</c:url>
 			
-			<tr>
-				<td>${tool.name }</td>
-				<td>${tool.purpose }</td>
-				<td>${tool.supportedByEmails }</td>
-				<td>${tool.teamName }</td>
-				<td>
-					<!-- display update link -->
-					<a href="${updateLink}">Update</a>
-				</td>
-				
-				<td>
-					<!-- display update link -->
-					<a href="${addInstanceLink}">Add an instance</a>
-				</td>
-				
-				
-			</tr>
+			<c:url var="deleteInstanceLink" value="/devops/tool/${tool.id}">
+			</c:url>
 			
-		</c:forEach>
-		</table>
-		</div>		
+		
+		<div class="card mx-2 mb-3" style="width: 20rem;">
+		<a href="#" data-toggle="${tool.purpose }" title="${tool.purpose}">
+		  <img class="card-img-top" width="10" height="60"  src="${pageContext.request.contextPath}/resources/image/devops.jpeg" alt="GTSO">
+	    </a>
+		  <a href="" <i class="fa fa-bullhorn"></i></a>
+		  
+  			<div class="card-body" >
+    			<h5 class="card-title">${tool.name }</h5>
+    			<h6>Health : </h6>
+    			<h6>Announcement : </h6>
+    			<p class="card-text">  <small> </br> <address>Supported Mail: ${tool.supportedByEmails} Team: ${tool.teamName }</address></small></p>
+    			<a href="${instancesLink}" class="btn btn-primary">Instances</a>
+    			<a href="${updateLink}" class="btn btn-primary">Edit</a>
+    			
+    			<a onclick="if (!(confirm('Are you Sure, you want to delete this??'))) return false" class="btn btn-danger"   href="${deleteInstanceLink}" >DELETE</a>
+    			
+    			
+  			</div>
+		</div>
+		
+			</c:forEach>
+		</div>
 	</div>
+</div>
 
-
+		<div class="col-1 mt-2">
+			<%@include file="tier.jsp" %>
+		</div>
+</div>
+	
+	
+	
+</div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.broadcom.devopsd.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.broadcom.devopsd.entity.Tier;
 import com.broadcom.devopsd.entity.Tool;
+import com.broadcom.devopsd.entity.ToolInstance;
 
 @Repository
 public class ToolDaoImpl implements ToolDao{
@@ -46,10 +48,8 @@ public class ToolDaoImpl implements ToolDao{
 
 	@Override
 	public void saveTool(Tool tool) {
-		// TODO Auto-generated method stub
 		Session session = this.sessionFactory.getCurrentSession();
-		session.save(tool);
-		
+		session.saveOrUpdate(tool);
 	}
 
 
@@ -60,6 +60,44 @@ public class ToolDaoImpl implements ToolDao{
 		
 		Tool tool = session.get(Tool.class, toolId);
 		return tool;
+	}
+
+
+	@Override
+	public List<Tool> getTools(String tier) {
+		// TODO Auto-generated method stub
+		Session session = this.sessionFactory.getCurrentSession();
+		Query<Tool> query = session.createQuery("from Tool where tier= :tier order by startDate", Tool.class);
+		query.setString("tier", tier);
+		List<Tool> tools = query.getResultList();
+		return tools;
+		
+	}
+
+
+	@Override
+	public void deleteTool(int toolId) {
+		Session session = this.sessionFactory.getCurrentSession();
+		
+		Query<ToolInstance> query1 = session.createQuery("from ToolInstance where tool= :toolId order by startDate", ToolInstance.class);
+		query1.setInteger("toolId", toolId);
+		
+		
+		List<ToolInstance> toolInstances = query1.getResultList();
+		
+		if (toolInstances.size() > 0) {
+			System.out.println("Can not delete tool because it has many instances...");
+			return;
+		}
+		
+		Query query2 = session.createQuery("delete from Tool where id=:toolId");
+		
+		query2.setParameter("toolId", toolId);
+		
+		query2.executeUpdate();
+		
+		//TBIMPLEMENTED----<<<
+		
 	}
 
 }
