@@ -2,6 +2,7 @@ package com.broadcom.devopsd.service;
 
 import java.util.List;
 
+import com.broadcom.devopsd.entity.Announcement;
 import com.broadcom.devopsd.entity.Tool;
 import com.broadcom.devopsd.entity.ToolInstance;
 
@@ -27,5 +28,15 @@ public interface DevopsService {
 	public void saveToolInstance(ToolInstance toolInstance);
 
 	public void deleteToolInstance(int instanceId);
+
+	public void saveAnnouncement(Announcement announcement);
+
+	public List<Announcement> listActiveAnnouncements();
+
+	public Announcement getAnnouncement(int announcementId);
+
+	public void deleteAnnouncement(int announcementId);
+
+	public List<Announcement> listAllAnnouncements();
 	
 }

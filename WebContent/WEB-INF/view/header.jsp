@@ -18,7 +18,7 @@
 		</li>
 		
 		<li>
-    		<a class="mr-3 btn-white" href="${pageContext.request.contextPath}/devops/showFormForAddNewApplication">Announcement </a>
+    		<a class="mr-3 btn-white" href="${pageContext.request.contextPath}/devops/announcements">Announcement </a>
 		</li>
 	</ul>
 	</div>
@@ -29,7 +29,7 @@
 		<div class="container-fluid float-right ml-10">
 		<li>
 			
-			<a class="btn-white" href="${pageContext.request.contextPath}/devops/showFormForAddNewApplication">Login </a>
+			<a class="btn-white" href="#">Login </a>
 			
 		</li>
 		</div>

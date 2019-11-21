@@ -1,16 +1,5 @@
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-
-
-
-
-
-
 
 //https://codepen.io/taboo09/pen/YXKzaP
-
-
 
 function change_left() {
   $('div').removeClass('slide-right').addClass('slide-left');
@@ -31,3 +20,31 @@ function to_right() {
 
 to_left();
 to_right();
+
+
+
+function getValue(obj)
+{
+	//alert("You have selected Kind: " + obj.value);
+	
+	if (obj.value == 'UNPLANNED') {
+		$('#mySelect').attr('hidden',true)
+	} else {
+		$('#mySelect').attr('hidden',false)
+	}
+
+}
+
+$(document).ready(function($){
+	$('#endDatePicker').datepicker({minDate: new Date()});
+	
+	$('#startDatePicker').datepicker({minDate: new Date()});
+	
+	$('#startTimePicker').timepicker({});
+	$('#endTimePicker').timepicker({});
+	
+});
+  
+
+
+

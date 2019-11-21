@@ -22,12 +22,12 @@
 	</div>
 	
 	
-	<div id="devops-form" class="mt-3">
+	<div id="devops-form" class="mt-5">
 	
-		<form:form action="${pageContext.request.contextPath}/devops/announcement" modelAttribute="announcement" method="POST" autocomplete="off">
-			<form:hidden path="id" />
+		<form:form action="${pageContext.request.contextPath}/devops/tool/${announcement.id}/instance/" modelAttribute="announcement" method="POST" autocomplete="off">
+
 			<div class="form-group">
-				<label for="subject"><bold>Subject</bold></label> 
+				<label for="subject">Subject</label> 
 				<form:input type="text" class="form-control" placeholder="<Announcement Subject>" id="subject" path="subject" />
 			</div>
 			
@@ -50,9 +50,9 @@
 			
 			
 			<div  id="mySelect" class="form-group">
-				<label for="startDate">Start Date</label>		
-				<form:input id="startDatePicker" class= "date" path="startDate" />
-				<!--<form:input id="startTimePicker"  path="startDate" />-->
+				<label for="startDate">Start Date - Time</label>		
+				<form:input id="startDatePicker"  path="startDate" />
+				<form:input id="startTimePicker"  path="startDate" />
 			</div>
 			
 			<div class="form-group">
@@ -63,15 +63,16 @@
 			</div>
 	
 			<div  class="form-group">
-				<label for="endDate">Tentative End Date</label>		
-				<form:input id="endDatePicker" class= "date" path="endDate" />
-				<!--<form:input id="endTimePicker"  path="endDate" />-->
+				<label for="endDate">Tentative End Date - Time</label>		
+				<form:input id="endDatePicker" path="endDate" />
+				<form:input id="endTimePicker"  path="endDate" />
 			</div>
 			
 			
 			<div  class="form-group">
-				<label for="active">Active</label>		
-				<form:checkbox path="active"  />
+				<label for="endDate">Tentative End Date - Time</label>		
+				<form:input id="endDatePicker" path="endDate" />
+				<form:input id="endTimePicker"  path="endDate" />
 			</div>
 			
 			

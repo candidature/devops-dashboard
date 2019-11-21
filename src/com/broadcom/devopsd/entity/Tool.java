@@ -48,12 +48,18 @@ public class Tool {
 	@Column(name="active")
 	private boolean active = true;
 	
-	@Column(name="tool_announicement")
-	private String announcement;
+	//@Column(name="tool_announicement")
+	//private String announcement;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 										CascadeType.REFRESH, CascadeType.MERGE})
 	private List<ToolInstance> instances;
+	
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.REFRESH, CascadeType.MERGE})
+	private List<Announcement> announcements;
+	
 
 	
 	public Tool() {}
@@ -66,6 +72,16 @@ public class Tool {
 		instances.add(toolInstance);
 		toolInstance.setTool(this);
 	}
+	
+	
+	public void add(Announcement announcement) {
+		if (announcements == null) {
+			announcements = new ArrayList<>();
+		}
+		announcements.add(announcement);
+		announcement.setTool(this);
+	}
+	
 	
 	public List<ToolInstance> getInstances() {
 		return instances;
@@ -91,7 +107,7 @@ public class Tool {
 	
 	
 	public Tool(String name, Tier tier, String purpose, String supportedByEmails, String teamName, Date startDate,
-			boolean active, String announcement, List<ToolInstance> instances) {
+			boolean active, List<ToolInstance> instances) {
 		super();
 		this.name = name;
 		this.tier = tier;
@@ -100,7 +116,7 @@ public class Tool {
 		this.teamName = teamName;
 		this.startDate = startDate;
 		this.active = active;
-		this.announcement = announcement;
+		
 		//this.instances = instances;
 	}
 
@@ -168,20 +184,14 @@ public class Tool {
 		this.active = active;
 	}
 
-	public String getAnnouncement() {
-		return announcement;
-	}
-
-	public void setAnnouncement(String announcement) {
-		this.announcement = announcement;
-	}
+		
 
 	
 	@Override
 	public String toString() {
 		return "Tool [id=" + id + ", name=" + name + ", tier=" + tier + ", purpose=" + purpose + ", supportedByEmails="
 				+ supportedByEmails + ", teamName=" + teamName + ", startDate=" + startDate + ", active=" + active
-				+ ", announcement=" + announcement  + "]";
+				 + "]";
 	}
 	
 	

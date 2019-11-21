@@ -17,7 +17,7 @@
 <div class="col">
 	<div class="p-1">
 	
-		<c:if test="${globalAnnouncement != null }">
+		<c:if test="${globalAnnouncement[0].subject != null }">
 			<script>
 				to_left();
 				to_right();
@@ -25,7 +25,11 @@
 			
 			
 			<div class="main slide-right">
-				<p>Global Announcement: ${globalAnnouncement} </p>
+				<c:forEach var="gAnnouncement" items="${globalAnnouncement}">
+					<h4>${gAnnouncement.subject} </h4>
+					<h6>${gAnnouncement.details} </h6>
+					<hr>
+				</c:forEach>
 			</div>
 		</c:if>
 		

@@ -7,8 +7,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.broadcom.devopsd.dao.AnnouncementDao;
 import com.broadcom.devopsd.dao.ToolDao;
 import com.broadcom.devopsd.dao.ToolInstanceDao;
+import com.broadcom.devopsd.entity.Announcement;
 import com.broadcom.devopsd.entity.Tool;
 import com.broadcom.devopsd.entity.ToolInstance;
 
@@ -20,6 +22,10 @@ public class DevopsServiceImpl implements DevopsService {
 	
 	@Autowired
 	private ToolInstanceDao toolInstanceDao;
+	
+	@Autowired
+	private AnnouncementDao announcementDao;
+	
 	
 	@Override
 	@Transactional
@@ -101,5 +107,44 @@ public class DevopsServiceImpl implements DevopsService {
 	public void deleteToolInstance(int instanceId) {
 		// TODO Auto-generated method stub
 		toolInstanceDao.deleteToolInstance(instanceId);
+	}
+
+	@Override
+	@Transactional
+	public void saveAnnouncement(Announcement announcement) {
+		// TODO Auto-generated method stub
+		announcementDao.saveAnnouncement(announcement);
+		
+	}
+
+	@Override
+	@Transactional
+	public List<Announcement> listActiveAnnouncements() {
+		// TODO Auto-generated method stub
+		
+		return announcementDao.listActiveAnnouncements();
+		
+		
+	}
+
+	@Override
+	@Transactional
+	public Announcement getAnnouncement(int announcementId) {
+		// TODO Auto-generated method stub
+		return announcementDao.getAnnouncement(announcementId);
+	}
+
+	@Override
+	@Transactional
+	public void deleteAnnouncement(int announcementId) {
+		// TODO Auto-generated method stub
+		announcementDao.deleteAnnouncement(announcementId);
+	}
+
+	@Override
+	@Transactional
+	public List<Announcement> listAllAnnouncements() {
+		// TODO Auto-generated method stub
+		return announcementDao.listAllAnnouncements();
 	}
 }

@@ -1,15 +1,19 @@
 package com.broadcom.devopsd.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,12 +42,26 @@ public class ToolInstance {
 	
 	private String status = "UNKNOWN"; // DISABLED // GREEN // RED 
 	
-	private String announcement = "NONE";
 	
 	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 										CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name="tool_id")
 	private Tool tool;
+	
+
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+			CascadeType.REFRESH, CascadeType.MERGE})
+	private List<Announcement> announcements;
+	
+	public void add(Announcement announcement) {
+		if (announcements == null) {
+			announcements = new ArrayList<>();
+		}
+		announcements.add(announcement);
+		announcement.setToolInstance(this);
+	}
+	
 	
 	public ToolInstance() { }
 
@@ -129,13 +147,7 @@ public class ToolInstance {
 		this.status = status;
 	}
 
-	public String getAnnouncement() {
-		return announcement;
-	}
-
-	public void setAnnouncement(String announcement) {
-		this.announcement = announcement;
-	}
+	
 
 	public Tool getTool() {
 		return tool;
@@ -150,7 +162,7 @@ public class ToolInstance {
 	@Override
 	public String toString() {
 		return "ToolInstance [id=" + id + ", url=" + url + ", team=" + team + ", owner=" + owner + ", startDate="
-				+ startDate + ", active=" + active + ", status=" + status + ", announcement=" + announcement
+				+ startDate + ", active=" + active + ", status=" + status
 				+ ", tool=" + tool + "]";
 	}
 }

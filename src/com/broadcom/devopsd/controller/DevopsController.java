@@ -1,13 +1,19 @@
 package com.broadcom.devopsd.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.broadcom.devopsd.dao.ToolDao;
 import com.broadcom.devopsd.entity.Announcement;
+import com.broadcom.devopsd.entity.Criticality;
+import com.broadcom.devopsd.entity.Kind;
 import com.broadcom.devopsd.entity.Tier;
 import com.broadcom.devopsd.entity.Tool;
 import com.broadcom.devopsd.entity.ToolInstance;
@@ -27,11 +35,25 @@ public class DevopsController {
 	@Autowired
 	private DevopsService devopsService;
 	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		//SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	    //dateFormat.setLenient(false);
+
+	    DateFormat newDate = new SimpleDateFormat("dd/MM/yyyy");
+	    
+	    // true passed to CustomDateEditor constructor means convert empty String to null
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(newDate, true));
+	}
+	
 	@RequestMapping("/tools")
 	public String listTools(Model model) {
 		List<Tool> tools = this.devopsService.getTools();
-		
 		model.addAttribute("tools", tools);
+		
+		List<Announcement> announcements = devopsService.listActiveAnnouncements();
+		model.addAttribute("globalAnnouncement", announcements);
+		
 		return "list-tools";
 	}
 	
@@ -222,19 +244,63 @@ public class DevopsController {
 	}
 	
 	
-	
-	
+
+
 	/* Below code is related to announcement */
 	
+	/* DISPLAY ANNOUNCEMENT FORM */
 	@RequestMapping("/announcement")
 	public String showCreateAnnouncementForm(Model model) {
 		Announcement announcement = new Announcement();
-		model.addAttribute("tool", announcement);
+		model.addAttribute("announcement", announcement);
+		
+		EnumSet<Kind> kinds = EnumSet.allOf(Kind.class);
+		model.addAttribute("kinds", kinds);
+		
+		
+		EnumSet<Criticality> criticalities = EnumSet.allOf(Criticality.class);
+		model.addAttribute("criticalities", criticalities);
 		
 		return "announcement-new-form";
 	}
 	
+	/* Save the Announcement FORM */
+	@PostMapping("/announcement")
+	public String saveCreateAnnouncementForm(@ModelAttribute("Announcement") Announcement announcement) {
+		devopsService.saveAnnouncement(announcement);
+		return "redirect:/devops/announcements/";
+		
+	}
+	
+	/* EDIT an announcement form but save using same method as of new creation remember hidden id field does magic. */
+	@GetMapping("/announcement/{announcementId}")
+	public String editAnnouncementForm(@PathVariable("announcementId") int announcementId, Model model) {
+		//devopsService.saveAnnouncement(announcement);
+		
+		Announcement announcement = devopsService.getAnnouncement(announcementId);
+		model.addAttribute("announcement", announcement);
+		return "announcement-new-form";
+	}
 	
 	
+	/* List active announcement */
+	
+	@GetMapping("/announcements")
+	public String listAnnouncementsForm(Model model) {
+		List<Announcement> announcements = devopsService.listAllAnnouncements();
+		model.addAttribute("announcements", announcements);
+		return "announcement-global-list";
+	}
+	
+	/* EDIT an announcement form but save using same method as of new creation remember hidden id field does magic. */
+	@GetMapping("/announcement/{announcementId}/delete")
+	public String deleteAnnouncement(@PathVariable("announcementId") int announcementId) {
+		//devopsService.saveAnnouncement(announcement);
+		
+		devopsService.deleteAnnouncement(announcementId);
+		
+
+		return "redirect:/devops/announcements/";
+	}
 	
 }
