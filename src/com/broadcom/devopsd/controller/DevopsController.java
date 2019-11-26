@@ -303,4 +303,27 @@ public class DevopsController {
 		return "redirect:/devops/announcements/";
 	}
 	
+	
+	
+	/* DISPLAY ANNOUNCEMENT FORM for a TOOL/APP*/
+	@RequestMapping("/announcement/{toolId}")
+	public String showCreateAnnouncementFormForTool(@PathVariable("toolId") int toolId, Model model) {
+		Announcement announcement = new Announcement();
+		model.addAttribute("announcement", announcement);
+		
+		EnumSet<Kind> kinds = EnumSet.allOf(Kind.class);
+		model.addAttribute("kinds", kinds);
+		
+		
+		EnumSet<Criticality> criticalities = EnumSet.allOf(Criticality.class);
+		model.addAttribute("criticalities", criticalities);
+		
+		Tool tool = devopsService.getTool(toolId);
+		
+		model.addAttribute("tool", tool);
+		
+		return "announcement-new-form";
+	}
+	
+	
 }

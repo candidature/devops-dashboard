@@ -75,6 +75,32 @@
 			</div>
 			
 			
+			
+			
+			
+			
+			<c:if test="${globalAnnouncement[0].subject != null }">
+			<script>
+				to_left();
+				to_right();
+			</script>
+			
+			
+			<div class="main slide-right">
+				<c:forEach var="gAnnouncement" items="${globalAnnouncement}">
+					<h4>${gAnnouncement.subject} </h4>
+					<h6>${gAnnouncement.details} </h6>
+					<hr>
+				</c:forEach>
+			</div>
+			</c:if>
+			
+			
+			
+			
+			
+			
+			
 			<input class="btn btn-primary" type="submit" value="Submit">
 			
 			<div style="clear; both;"></div>
