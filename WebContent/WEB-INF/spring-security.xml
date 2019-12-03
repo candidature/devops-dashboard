@@ -1,0 +1,39 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"  
+    xmlns:beans="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans.xsd  
+    http://www.springframework.org/schema/security  
+    http://www.springframework.org/schema/security/spring-security.xsd">  
+    
+    <authentication-manager>  
+      <authentication-provider>  
+        <user-service>  
+        <user name="gpankaj"  password="{noop}gpankaj" authorities="ROLE_ADMIN" />
+        <user name="user1" password="{noop}user1" authorities="ROLE_USER" />
+        
+        </user-service>
+          
+      </authentication-provider>
+        
+    </authentication-manager>
+    
+    <http auto-config="true">
+    	<logout logout-success-url="/devops/tools" delete-cookies="JSESSIONID" /> 
+        
+        <intercept-url pattern="/devops/showFormForAddNewApplication" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/announcement" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/announcement/*" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/announcement/*/delete" access="hasRole('ADMIN')" />
+        
+        <intercept-url pattern="/devops/tool/*" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/showFormForToolUpdate" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/tool/*/instance" access="hasRole('ADMIN')" />
+        
+        <intercept-url pattern="/devops/tool/*/instance/*" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/devops/tool/*/instance/*/delete" access="hasRole('ADMIN')" />
+    </http> 
+    
+</beans:beans>
+
+			

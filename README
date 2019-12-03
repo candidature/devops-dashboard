@@ -1,3 +1,13 @@
+MAC Mysql
+
+launchctl unload /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+launchctl load /Library/LaunchDaemons/com.oracle.oss.mysql.mysqld.plist
+
+mysql -u root -p 
+mysql -u devops -p
+devops
+
+
 export JAVA_HOME=/tools/oss/packages/x86_64-centos7/java/jdk-11.0.2
 
 How to find java home:

@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.broadcom.devopsd.dao.ToolDao;
 import com.broadcom.devopsd.entity.Announcement;
 import com.broadcom.devopsd.entity.Criticality;
+import com.broadcom.devopsd.entity.Domain;
 import com.broadcom.devopsd.entity.Kind;
 import com.broadcom.devopsd.entity.Tier;
 import com.broadcom.devopsd.entity.Tool;
@@ -75,6 +76,10 @@ public class DevopsController {
 		model.addAttribute("tool", tool);
 		EnumSet<Tier> tiers = EnumSet.allOf(Tier.class);
 		model.addAttribute("tiers", tiers);
+		
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
 		return "tool-form";
 	}
 	
@@ -95,6 +100,9 @@ public class DevopsController {
 	    model.addAttribute("tool", tool);
 	    model.addAttribute("kind", "EDIT");
 	    
+	    List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
 		return "tool-form";
 		
 	}
@@ -117,16 +125,19 @@ public class DevopsController {
 	@GetMapping(value="/tool/{toolId}/instance")
 	public String GetAddNewInstanceForm2(@PathVariable("toolId") int toolId, Model model) {
 		
-		
 		System.out.println("For debugging..." + Integer.toString(toolId));
 		Tool tool = this.devopsService.getTool(toolId);
-	    model.addAttribute("tool", tool);
-	    
+		model.addAttribute("tool", tool);
+	
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+	
 	    ToolInstance toolInstance = new ToolInstance();
 	    model.addAttribute("toolInstance", toolInstance);
 	    
 	    
-	    
+	    EnumSet<Domain> domains = EnumSet.allOf(Domain.class);
+		model.addAttribute("domains", domains);
 	    
 		return "instance-form";
 		
@@ -181,7 +192,10 @@ public class DevopsController {
 	    Tool tool = this.devopsService.getTool(toolId);
 	    model.addAttribute("tool", tool);
 	    
-	    
+	    List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
+		
 		return "instance-form";
 		
 	}
@@ -209,6 +223,11 @@ public class DevopsController {
 		List<ToolInstance> toolInstances = this.devopsService.getInstances(toolId);
 	    model.addAttribute("toolInstances", toolInstances);
 	    model.addAttribute("toolId", toolId);
+	    
+	    List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
+		
 		return "list-instances";
 		
 	}
@@ -217,12 +236,17 @@ public class DevopsController {
 	
 	
 	
-	@GetMapping(value="/tools/instances")
+	@GetMapping(value="/instances")
 	public String ListInstanceAllInstances(Model model) {
 		
 		List<ToolInstance> toolInstances = this.devopsService.getInstances();
 	    model.addAttribute("toolInstances", toolInstances);
+	    System.out.println("Got list of toolInstances " + toolInstances);
 	    
+	    List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
+		
 		return "list-all-instances";
 		
 	}
@@ -261,6 +285,9 @@ public class DevopsController {
 		EnumSet<Criticality> criticalities = EnumSet.allOf(Criticality.class);
 		model.addAttribute("criticalities", criticalities);
 		
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
 		return "announcement-new-form";
 	}
 	
@@ -279,6 +306,10 @@ public class DevopsController {
 		
 		Announcement announcement = devopsService.getAnnouncement(announcementId);
 		model.addAttribute("announcement", announcement);
+		
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
 		return "announcement-new-form";
 	}
 	
@@ -289,6 +320,11 @@ public class DevopsController {
 	public String listAnnouncementsForm(Model model) {
 		List<Announcement> announcements = devopsService.listAllAnnouncements();
 		model.addAttribute("announcements", announcements);
+		
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
+		
+		
 		return "announcement-global-list";
 	}
 	
@@ -313,6 +349,9 @@ public class DevopsController {
 		
 		EnumSet<Kind> kinds = EnumSet.allOf(Kind.class);
 		model.addAttribute("kinds", kinds);
+		
+		List<Tool> tools = this.devopsService.getTools();
+		model.addAttribute("tools", tools);
 		
 		
 		EnumSet<Criticality> criticalities = EnumSet.allOf(Criticality.class);

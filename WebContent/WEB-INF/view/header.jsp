@@ -6,7 +6,7 @@
   <ul class="nav navbar-nav">
   
   <li>
-  	<a class="mr-3 btn-white" href="${pageContext.request.contextPath}/devops/tools">Home </a>
+  	<a class="mr-2 btn-white" href="${pageContext.request.contextPath}/devops/tools">Home </a>
   </li>
    
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -14,32 +14,41 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       
     	<li>
-    		<a class="mr-3 btn-white" href="${pageContext.request.contextPath}/devops/showFormForAddNewApplication">Add Application </a>
+    		<a class="mr-2 btn-white" href="${pageContext.request.contextPath}/devops/showFormForAddNewApplication">Add Application </a>
 		</li>
 		
 		<li>
-    		<a class="mr-3 btn-white" href="${pageContext.request.contextPath}/devops/announcements">Announcement </a>
+    		<a class="mr-2 btn-white" href="${pageContext.request.contextPath}/devops/announcements">Announcement </a>
 		</li>
+		
+		<c:if test="${pageContext.request.userPrincipal.name != null}">
+			<li>
+				<a class="btn-white" href="${pageContext.request.contextPath}/logout">Logout</a>
+				
+			</li>
+			<li>
+				<div class="btn-white" style="font-size:15px"> Hello <b><c:out value="${pageContext.request.remoteUser}"/></b> </div>
+			</li>
+		</c:if>
+		<c:if test="${pageContext.request.userPrincipal.name == null}">
+			<li>
+				<a class="btn-white" href="${pageContext.request.contextPath}/login">Login </a>
+			</li>
+		</c:if>
+		
 	</ul>
 	</div>
-	<div>
-		<ul>
+	
 		
 		
-		<div class="container-fluid float-right ml-10">
-		<li>
-			
-			<a class="btn-white" href="#">Login </a>
-			
-		</li>
+		<div class="container float-right ml-6">
+		
 		</div>
-		</ul>
+		
+
 		
     </div>
-  </div>
-  
-  
-  </ul>
+ 
   
 </nav>
  

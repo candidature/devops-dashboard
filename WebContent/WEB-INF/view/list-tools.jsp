@@ -1,8 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
     
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,7 @@
 <body>
 <div class="container">
 
-	<%@include file="header.jsp" %>
+	<%@include file="header2.jsp" %>
 <div class="row">
 <div class="col">
 	<div class="p-1">
@@ -65,7 +66,7 @@
 		<a href="#" data-toggle="${tool.purpose }" title="${tool.purpose}">
 		  <img class="card-img-top" width="10" height="60"  src="${pageContext.request.contextPath}/resources/image/devops.jpeg" alt="GTSO">
 	    </a>
-		  <a href="" <i class="fa fa-bullhorn"></i></a>
+		  <a href="" ><i class="fa fa-bullhorn"></i></a>
 		  
   			<div class="card-body" >
     			<h5 class="card-title">${tool.name }</h5>

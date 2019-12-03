@@ -8,13 +8,14 @@
 <html>
 <head>
 <%@include file="head.jsp" %>
+
 </head>
 <body>
 
 <div class="container">
 	
 	<div id="wrapper" align="center">
-		<%@include file="header.jsp" %>
+		<%@include file="header2.jsp" %>
 		<div class="mt-5" id="header">
 			<h2>List of instances for - ${toolInstances[0].tool.name}</h2>
 		</div>

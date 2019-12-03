@@ -27,13 +27,13 @@ public class ToolInstanceDaoImpl implements ToolInstanceDao {
 	
 	@Override
 	public List<ToolInstance> getToolInstances() {
-		// TODO Auto-generated method stub
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		
+		List<ToolInstance> toolInstances = session.createQuery("from ToolInstance", ToolInstance.class).list();
+		//Query<ToolInstance> query = session.createQuery("from ToolInstance order by startDate", ToolInstance.class);
+		//List<ToolInstance> toolInstances = query.getResultList();
 		
-		Query<ToolInstance> query = session.createQuery("from ToolInstance order by startDate", ToolInstance.class);
-		List<ToolInstance> toolInstances = query.getResultList();
 		
 		
 		return toolInstances;

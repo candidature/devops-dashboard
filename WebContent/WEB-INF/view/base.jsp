@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -11,7 +12,7 @@
 
 <body>
 
-	<%@include file="header.jsp" %>
+	<%@include file="header2.jsp" %>
 	
 	
 	<div id = "wrapper">

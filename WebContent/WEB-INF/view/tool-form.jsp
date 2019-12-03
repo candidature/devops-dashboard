@@ -1,34 +1,23 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+    
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
 
-<!-- Refernce file from our directory -->
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" />
-
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/add-customer-style.css" />
-
-<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
-
-
-
-<title>Insert title here</title>
-</head>
+<%@include file="head.jsp" %>
 
 <body>
 <div class="container">
 
-	
+	<%@include file="header2.jsp" %>
 	<c:choose>
 	    <c:when test="${kind == 'EDIT'}">
 	        <div id="wrapper" align="center">
-				<%@include file="header.jsp" %>
+				
 				<div class="mt-5" id="header">
 				<h2>EDIT Devops Application Form</h2>
 			</div>
@@ -36,7 +25,6 @@
 	    </c:when>    
 	    <c:otherwise>
 	        <div id="wrapper" align="center">
-				<%@include file="header.jsp" %>
 				<div class="mt-5" id="header">
 					<h2>Add new Devops Application Form</h2>
 				</div>

@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name="tool_instance")
@@ -40,17 +45,29 @@ public class ToolInstance {
 	@Column(name="active")
 	private boolean active = true;
 	
+	
+	@Enumerated(EnumType.STRING)
+    @Column(length = 15)
+	private Domain domain; //
+	
+	@Column(name="label")
+	private String label; // 
+	
+	
+	
 	private String status = "UNKNOWN"; // DISABLED // GREEN // RED 
 	
+
 	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 										CascadeType.REFRESH, CascadeType.MERGE})
+	
 	@JoinColumn(name="tool_id")
 	private Tool tool;
 	
 
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.REFRESH, CascadeType.MERGE})
 	private List<Announcement> announcements;
 	
@@ -79,6 +96,22 @@ public class ToolInstance {
 	}
 	
 	
+	public ToolInstance(int id, String url, String team, String owner, Date startDate, boolean active, Domain domain,
+			String label, String status) {
+		super();
+		this.id = id;
+		this.url = url;
+		this.team = team;
+		this.owner = owner;
+		this.startDate = startDate;
+		this.active = active;
+		this.domain = domain;
+		this.label = label;
+		this.status = status;
+		
+	}
+
+
 	public ToolInstance(String url, String team, String owner, Date startDate, boolean active, String status) {
 		super();
 		this.url = url;
@@ -158,11 +191,33 @@ public class ToolInstance {
 	}
 
 
+	public Domain getDomain() {
+		return domain;
+	}
+
+
+	public void setDomain(Domain domain) {
+		this.domain = domain;
+	}
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 
 	@Override
 	public String toString() {
 		return "ToolInstance [id=" + id + ", url=" + url + ", team=" + team + ", owner=" + owner + ", startDate="
-				+ startDate + ", active=" + active + ", status=" + status
-				+ ", tool=" + tool + "]";
+				+ startDate + ", active=" + active + ", domain=" + domain + ", label=" + label + ", status=" + status
+				+ ", tool=" + tool + ", announcements=" + announcements + "]";
 	}
+
+
+
 }

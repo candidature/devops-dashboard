@@ -151,3 +151,9 @@ div.slide-left p {
 @keyframes slide-left { from {margin-left: 0%;width: 100%;}
  to {margin-left: -100%;width: 100%;} }
  
+ 
+.navbar-default{
+    background-color: #b30000;
+    border-color: white;
+}
+
