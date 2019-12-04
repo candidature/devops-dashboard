@@ -1,5 +1,5 @@
 html, body{
-	margin-left:5px; margin-right:5px; 
+	margin-left:2px; margin-right:2px; 
 	 
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 }
@@ -100,13 +100,6 @@ ul {
 }
 
 
-
-
-
-
-
-
-
 div.main {
   width:90%;
   overflow:hidden;
@@ -115,45 +108,25 @@ div.main {
   height: auto;
   border: 1px solid gray;
   padding: 1em 0;
-  font-size: 2em;
+  font-size: 1em;
   font-family: "Agency FB";
   color: #E4F6F8;
 }
-div.slide-right p {
-  -moz-animation: 10s slide-right;
-  -webkit-animation: 10s slide-right;
-  -o-animation: 10s slide-right;
-  animation: 10s slide-right;
-  margin:0;
-}
-div.slide-left p {
-  -moz-animation: 1s slide-left;
-  -webkit-animation: 1s slide-left;
-  -o-animation: 1s slide-left;
-  animation: 10s slide-left;
-  margin:0;
-}
-@-webkit-keyframes slide-right { from { margin-left: 100%;width: 100%; }
-  to {margin-left: 0%;width: 100%;} }
-@-moz-keyframes slide-right { from { margin-left: 100%;width: 100%; }
-  to {margin-left: 0%;width: 100%;} }
- @-o-keyframes slide-right { from { margin-left: 100%;width: 100%; }
-  to {margin-left: 0%;width: 100%;} }
-@keyframes slide-right { from { margin-left: 100%;width: 100%; }
-  to {margin-left: 0%;width: 100%;} }
 
-@-webkit-keyframes slide-left { from {margin-left: 0%;width: 100%;}
- to {margin-left: -100%;width: 100%;} }
-@-moz-keyframes slide-left { from {margin-left: 0%;width: 100%;}
- to {margin-left: -100%;width: 100%;} }
-@-o-keyframes slide-left { from {margin-left: 0%;width: 100%;}
- to {margin-left: -100%;width: 100%;} }
-@keyframes slide-left { from {margin-left: 0%;width: 100%;}
- to {margin-left: -100%;width: 100%;} }
- 
  
 .navbar-default{
     background-color: #b30000;
     border-color: white;
 }
+
+div.marquee {
+    white-space:no-wrap;
+    overflow:hidden;
+}
+div.marquee > div.marquee-text {
+    white-space:nowrap;
+    display:inline;
+    width:auto;
+}
+
 

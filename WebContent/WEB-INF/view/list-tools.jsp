@@ -11,26 +11,39 @@
 <%@include file="head.jsp" %>
 
 <body>
+<script>
+
+$(document).ready(function() {
+    var marquee = $('div.marquee');
+    console.log(marquee);
+    marquee.each(function() {
+        var mar = $(this),indent = mar.width();
+        mar.marquee = function() {
+            indent--;
+            mar.css('text-indent',indent);
+            if (indent < -1 * mar.children('div.marquee-text').width()) {
+                indent = mar.width();
+            }
+        };
+        mar.data('interval',setInterval(mar.marquee,1000/60));
+    });
+});
+
+</script>
 <div class="container">
 
 	<%@include file="header2.jsp" %>
 <div class="row">
 <div class="col">
 	<div class="p-1">
-	
+		
 		<c:if test="${globalAnnouncement[0].subject != null }">
-			<script>
-				to_left();
-				to_right();
-			</script>
-			
-			
-			<div class="main slide-right">
+			<div class="main marquee">
+			<div class="marquee-text">
 				<c:forEach var="gAnnouncement" items="${globalAnnouncement}">
-					<h4>${gAnnouncement.subject} </h4>
-					<h6>${gAnnouncement.details} </h6>
-					<hr>
+					|| ${gAnnouncement.subject} ${gAnnouncement.details} ||
 				</c:forEach>
+			</div>
 			</div>
 		</c:if>
 		
@@ -61,17 +74,40 @@
 			<c:url var="deleteInstanceLink" value="/devops/tool/${tool.id}">
 			</c:url>
 			
-		
+			<c:url var="toolAnnouncementLink" value="/devops/announcement/tool/${tool.id}">
+			</c:url>
 		<div class="card mx-2 mb-3" style="width: 20rem;">
 		<a href="#" data-toggle="${tool.purpose }" title="${tool.purpose}">
 		  <img class="card-img-top" width="10" height="60"  src="${pageContext.request.contextPath}/resources/image/devops.jpeg" alt="GTSO">
 	    </a>
-		  <a href="" ><i class="fa fa-bullhorn"></i></a>
+		  <a href="${toolAnnouncementLink}" ><i class="fa fa-bullhorn"></i></a>
 		  
   			<div class="card-body" >
     			<h5 class="card-title">${tool.name }</h5>
     			<h6>Health : </h6>
-    			<h6>Announcement : </h6>
+    			<h6>Announcement : 
+    			
+    			
+    			
+    			<c:if test="${not empty tool.announcements}">
+					<div class="main marquee">
+					<div class="marquee-text">
+						<c:forEach var="announcement" items="${tool.announcements}">
+							|| ${announcement.subject} ${announcement.details} ||
+						</c:forEach>
+					</div>
+					</div>
+				</c:if>
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			
+    			</h6>
     			<p class="card-text">  <small> </br> <address>Supported Mail: ${tool.supportedByEmails} Team: ${tool.teamName }</address></small></p>
     			<a href="${instancesLink}" class="btn btn-primary">Instances</a>
     			<a href="${updateLink}" class="btn btn-primary">Edit</a>

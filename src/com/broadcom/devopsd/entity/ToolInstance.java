@@ -62,12 +62,11 @@ public class ToolInstance {
 	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 										CascadeType.REFRESH, CascadeType.MERGE})
 	
-	@JoinColumn(name="tool_id")
 	private Tool tool;
 	
 
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="toolInstance", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.REFRESH, CascadeType.MERGE})
 	private List<Announcement> announcements;
 	

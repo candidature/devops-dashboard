@@ -1,5 +1,6 @@
 package com.broadcom.devopsd.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -7,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,23 +56,19 @@ public class Announcement {
 	
 
 	@Column(name = "start_date")
-	private Date startDate = null;
+	private Date startDate = new Date();;
 	
 	
 	@Column(name = "end_date")
-	private Date endDate = null;
+	private Date endDate = new Date();;
 	
-	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.REFRESH, CascadeType.MERGE})
-	@JoinColumn(name="tool_id")
 	private Tool tool;
 	
 	
-	
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.REFRESH, CascadeType.MERGE})
-	@JoinColumn(name="toolInstance_id")
 	private ToolInstance toolInstance;
 	
 	

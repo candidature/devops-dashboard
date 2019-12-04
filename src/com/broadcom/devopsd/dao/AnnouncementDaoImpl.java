@@ -32,7 +32,7 @@ public class AnnouncementDaoImpl implements AnnouncementDao{
 		// TODO Auto-generated method stub
 		
 		Session session = this.sessionFactory.getCurrentSession();
-		Query<Announcement> query = session.createQuery("from Announcement where active=1", Announcement.class);
+		Query<Announcement> query = session.createQuery("from Announcement where active=1 and tool = null", Announcement.class);
 		List<Announcement> announcements = query.getResultList();
 		return announcements;
 	}

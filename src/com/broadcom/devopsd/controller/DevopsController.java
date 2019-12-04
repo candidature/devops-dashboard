@@ -272,7 +272,7 @@ public class DevopsController {
 
 	/* Below code is related to announcement */
 	
-	/* DISPLAY ANNOUNCEMENT FORM */
+	/* DISPLAY GLOBAL ANNOUNCEMENT FORM */
 	@RequestMapping("/announcement")
 	public String showCreateAnnouncementForm(Model model) {
 		Announcement announcement = new Announcement();
@@ -291,7 +291,7 @@ public class DevopsController {
 		return "announcement-new-form";
 	}
 	
-	/* Save the Announcement FORM */
+	/* Save the GLOBAL Announcement FORM */
 	@PostMapping("/announcement")
 	public String saveCreateAnnouncementForm(@ModelAttribute("Announcement") Announcement announcement) {
 		devopsService.saveAnnouncement(announcement);
@@ -341,10 +341,17 @@ public class DevopsController {
 	
 	
 	
-	/* DISPLAY ANNOUNCEMENT FORM for a TOOL/APP*/
-	@RequestMapping("/announcement/{toolId}")
+	/* DISPLAY ANNOUNCEMENT FORM for a TOOL */
+	@GetMapping("/announcement/tool/{toolId}")
 	public String showCreateAnnouncementFormForTool(@PathVariable("toolId") int toolId, Model model) {
+		
+		Tool tool = devopsService.getTool(toolId);
+		model.addAttribute("tool", tool);
+		
+		
 		Announcement announcement = new Announcement();
+		
+		//announcement.setTool(tool);
 		model.addAttribute("announcement", announcement);
 		
 		EnumSet<Kind> kinds = EnumSet.allOf(Kind.class);
@@ -357,12 +364,23 @@ public class DevopsController {
 		EnumSet<Criticality> criticalities = EnumSet.allOf(Criticality.class);
 		model.addAttribute("criticalities", criticalities);
 		
-		Tool tool = devopsService.getTool(toolId);
 		
-		model.addAttribute("tool", tool);
 		
-		return "announcement-new-form";
+		return "announcement-tool-new-form";
 	}
+	
+
+	/* Save the TOOL Announcement FORM */
+	@PostMapping("/announcement/tool/{toolId}")
+	public String saveCreateToolAnnouncementForm(@PathVariable("toolId") int toolId, @ModelAttribute("Announcement") Announcement announcement) {
+		Tool tool = devopsService.getTool(toolId);
+		System.out.println("Tool is " + tool);
+		announcement.setTool(tool);
+		devopsService.saveAnnouncement(announcement);
+		return "redirect:/devops/announcements/";
+		
+	}
+	
 	
 	
 }

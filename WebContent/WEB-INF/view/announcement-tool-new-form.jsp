@@ -17,17 +17,17 @@
 	<div id="wrapper" align="center">
 		<%@include file="header2.jsp" %>
 		<div class="mt-5" id="header">
-			<h2>Add New Announcment</h2>
+			<h2>Add New Announcment for Tool  - ${tool.name } </h2>
 		</div>
 	</div>
 	
 	
-	<div id="devops-form" class="mt-5">
+	<div id="devops-form" class="mt-3">
 	
-		<form:form action="${pageContext.request.contextPath}/devops/tool/${announcement.id}/instance/" modelAttribute="announcement" method="POST" autocomplete="off">
-
+		<form:form action="${pageContext.request.contextPath}/devops/announcement/tool/${tool.id}" modelAttribute="announcement" method="POST" autocomplete="off">
+			<form:hidden path="id" />
 			<div class="form-group">
-				<label for="subject">Subject</label> 
+				<label for="subject"><bold>Subject</bold></label> 
 				<form:input type="text" class="form-control" placeholder="<Announcement Subject>" id="subject" path="subject" />
 			</div>
 			
@@ -50,9 +50,9 @@
 			
 			
 			<div  id="mySelect" class="form-group">
-				<label for="startDate">Start Date - Time</label>		
-				<form:input id="startDatePicker"  path="startDate" />
-				<form:input id="startTimePicker"  path="startDate" />
+				<label for="startDate">Start Date</label>		
+				<form:input id="startDatePicker" class= "date" path="startDate" />
+				<!--<form:input id="startTimePicker"  path="startDate" />-->
 			</div>
 			
 			<div class="form-group">
@@ -63,17 +63,17 @@
 			</div>
 	
 			<div  class="form-group">
-				<label for="endDate">Tentative End Date - Time</label>		
-				<form:input id="endDatePicker" path="endDate" />
-				<form:input id="endTimePicker"  path="endDate" />
+				<label for="endDate">Tentative End Date</label>		
+				<form:input id="endDatePicker" class= "date" path="endDate" />
+				<!--<form:input id="endTimePicker"  path="endDate" />-->
 			</div>
 			
 			
 			<div  class="form-group">
-				<label for="endDate">Tentative End Date - Time</label>		
-				<form:input id="endDatePicker" path="endDate" />
-				<form:input id="endTimePicker"  path="endDate" />
+				<label for="active">Active</label>		
+				<form:checkbox path="active"  />
 			</div>
+			
 			
 			
 			<input class="btn btn-primary" type="submit" value="Submit">
@@ -85,3 +85,5 @@
 	</div>
 </body>
 </html>
+
+

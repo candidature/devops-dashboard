@@ -17,7 +17,7 @@
 	<div id="wrapper" align="center">
 		<%@include file="header2.jsp" %>
 		<div class="mt-5" id="header">
-			<h2>Add New Announcment</h2>
+			<h2>Add New Announcment </h2>
 		</div>
 	</div>
 	
@@ -73,31 +73,6 @@
 				<label for="active">Active</label>		
 				<form:checkbox path="active"  />
 			</div>
-			
-			
-			
-			
-			
-			
-			<c:if test="${globalAnnouncement[0].subject != null }">
-			<script>
-				to_left();
-				to_right();
-			</script>
-			
-			
-			<div class="main slide-right">
-				<c:forEach var="gAnnouncement" items="${globalAnnouncement}">
-					<h4>${gAnnouncement.subject} </h4>
-					<h6>${gAnnouncement.details} </h6>
-					<hr>
-				</c:forEach>
-			</div>
-			</c:if>
-			
-			
-			
-			
 			
 			
 			

@@ -2,7 +2,9 @@ package com.broadcom.devopsd.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -56,12 +59,23 @@ public class Tool {
 	private List<ToolInstance> instances;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="tool", cascade= {CascadeType.PERSIST, CascadeType.DETACH,
 			CascadeType.REFRESH, CascadeType.MERGE})
-	private List<Announcement> announcements;
+	
+	private Set<Announcement> announcements;
 	
 
 	
+	public Set<Announcement> getAnnouncements() {
+		return announcements;
+	}
+
+
+	public void setAnnouncements(Set<Announcement> announcements) {
+		this.announcements = announcements;
+	}
+
+
 	public Tool() {}
 	
 	
@@ -76,7 +90,7 @@ public class Tool {
 	
 	public void add(Announcement announcement) {
 		if (announcements == null) {
-			announcements = new ArrayList<>();
+			announcements = new HashSet<>();
 		}
 		announcements.add(announcement);
 		announcement.setTool(this);
