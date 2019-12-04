@@ -26,3 +26,5 @@ Install WAR:
 4)
 Copy artifacts:
 scp DEVOPS-DASH1.war jks-lvnhf-it-15.lvn.broadcom.net:/opt/tomcat/webapps 
+
+Use Tomcat 9 servelet container.

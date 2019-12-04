@@ -63,6 +63,13 @@
 			</div>
 			
 			
+			<div class="form-group">
+				<label for="command">Command to check health every 5 seconds(s) Exit 1: Failure, Exit 0: Success.</label> 
+				<form:input type="text" class="form-control" placeholder="<Command in double quotes>" id="command" path="command" />
+			</div>
+			
+			
+			
 			<input class="btn btn-primary" type="submit" value="Submit">
 			
 			<div style="clear; both;"></div>

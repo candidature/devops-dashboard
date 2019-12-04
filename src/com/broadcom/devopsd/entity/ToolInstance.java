@@ -54,7 +54,31 @@ public class ToolInstance {
 	private String label; // 
 	
 	
+	@Column(name="command")
+	private String command; // 
 	
+
+
+	public String getCommand() {
+		return command;
+	}
+
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
+
+
+	public List<Announcement> getAnnouncements() {
+		return announcements;
+	}
+
+
+	public void setAnnouncements(List<Announcement> announcements) {
+		this.announcements = announcements;
+	}
+
+
 	private String status = "UNKNOWN"; // DISABLED // GREEN // RED 
 	
 
