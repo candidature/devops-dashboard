@@ -1,5 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -84,7 +88,24 @@ $(document).ready(function() {
 		  
   			<div class="card-body" >
     			<h5 class="card-title">${tool.name }</h5>
-    			<h6>Health : </h6>
+    			
+    			
+    			<h6>Health : 
+    			
+    				<c:if test="${not empty tool.instances}">
+						${fn:length(tool.instances)}/${fn:length(tool.instances)}
+					</c:if>
+    				<c:if test="${empty tool.instances}">
+						0/0
+					</c:if>
+    			
+    			
+    			</h6>
+    			
+    			
+    			
+    			
+    			
     			<h6>Announcement : 
     			
     			
@@ -99,14 +120,7 @@ $(document).ready(function() {
 					</div>
 				</c:if>
     			
-    			
-    			
-    			
-    			
-    			
-    			
-    			
-    			
+
     			</h6>
     			<p class="card-text">  <small> </br> <address>Supported Mail: ${tool.supportedByEmails} Team: ${tool.teamName }</address></small></p>
     			<a href="${instancesLink}" class="btn btn-primary">Instances</a>

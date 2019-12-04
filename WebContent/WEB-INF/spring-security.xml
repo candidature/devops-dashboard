@@ -10,6 +10,15 @@
       <authentication-provider>  
         <user-service>  
         <user name="gpankaj"  password="{noop}gpankaj" authorities="ROLE_ADMIN" />
+        <user name="sarma"  password="{noop}sarma" authorities="ROLE_ADMIN" />
+        <user name="billmorton"  password="{noop}billmorton" authorities="ROLE_ADMIN" />
+        <user name="gouri"  password="{noop}gouri" authorities="ROLE_ADMIN" />
+        <user name="chris"  password="{noop}chris" authorities="ROLE_ADMIN" />
+        <user name="kami"  password="{noop}kami" authorities="ROLE_ADMIN" />
+        <user name="rama"  password="{noop}rama" authorities="ROLE_ADMIN" />
+        <user name="ravi"  password="{noop}ravi" authorities="ROLE_ADMIN" />
+        <user name="ravindra"  password="{noop}ravindra" authorities="ROLE_ADMIN" />
+        
         <user name="user1" password="{noop}user1" authorities="ROLE_USER" />
         
         </user-service>
